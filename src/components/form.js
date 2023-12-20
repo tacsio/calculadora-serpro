@@ -3,19 +3,17 @@
 import { PGPS } from "@/service/pgps";
 import { useEffect, useState } from "react";
 
-export default function CalcForm({ setData }) {
-  const pgps = new PGPS();
+const pgps = new PGPS();
 
+export default function CalcForm({ setData }) {
   const [nivel, setNivel] = useState(101);
   const [degrau, setDegrau] = useState("A");
   const [classe, setClasse] = useState("Classe I");
 
   useEffect(() => {
-    console.log("EFFECT")
-    console.log(nivel, degrau, classe);
     const result = pgps.calculate({ nivel, degrau, classe });
     setData(result);
-  }, [nivel, degrau, classe]);
+  }, [nivel, degrau, classe, setData]);
 
   return (
     <form>
