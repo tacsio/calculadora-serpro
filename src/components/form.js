@@ -1,9 +1,9 @@
 "use client";
 
-import { PGPS } from "@/service/pgps";
+import { PGCS } from "@/service/pgcs";
 import { useEffect, useState } from "react";
 
-const pgps = new PGPS();
+const pgcs = new PGCS();
 
 export default function CalcForm({ setData }) {
   const [nivel, setNivel] = useState(101);
@@ -11,7 +11,7 @@ export default function CalcForm({ setData }) {
   const [classe, setClasse] = useState("Classe I");
 
   useEffect(() => {
-    const result = pgps.calculate({ nivel, degrau, classe });
+    const result = pgcs.calculate({ nivel, degrau, classe });
     setData(result);
   }, [nivel, degrau, classe, setData]);
 
@@ -61,7 +61,7 @@ export default function CalcForm({ setData }) {
                   onChange={(event) => setNivel(event.target.value)}
                   value={nivel}
                 >
-                  {pgps.niveis.map((value, index) => (
+                  {pgcs.niveis.map((value, index) => (
                     <option className="text-center" key={index}>
                       {value}
                     </option>
@@ -86,7 +86,7 @@ export default function CalcForm({ setData }) {
                   onChange={(event) => setDegrau(event.target.value)}
                   value={degrau}
                 >
-                  {pgps.degraus.map((value, index) => (
+                  {pgcs.degraus.map((value, index) => (
                     <option className="text-center" key={index}>
                       {value}
                     </option>
@@ -111,7 +111,7 @@ export default function CalcForm({ setData }) {
                   onChange={(event) => setClasse(event.target.value)}
                   value={classe}
                 >
-                  {pgps.gratificaoes.map((value, index) => (
+                  {pgcs.gratificaoes.map((value, index) => (
                     <option className="text-center" key={index}>
                       {value}
                     </option>

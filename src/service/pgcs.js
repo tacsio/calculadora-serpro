@@ -1,6 +1,6 @@
 import { Calculadora } from "./calc";
 
-export class PGPS {
+export class PGCS {
   constructor() {
     this.niveis = Array.from({ length: 22 }, (x, i) => i + 101);
     this.degraus = ["A", "B"];
@@ -28,19 +28,25 @@ export class PGPS {
     const options = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
 
     return {
-      base: base.toLocaleString("pt-BR", options),
-      totalBruto: totalBruto.toLocaleString("pt-BR", options),
-      gratificao: gratificao.toLocaleString("pt-BR", options),
-      alimentacao: alimentacao.toLocaleString("pt-BR", options),
-      fgts: fgts.toLocaleString("pt-BR", options),
-
-      irpf: irpf.toLocaleString("pt-BR", options),
-      deducaoAlimentacao: deducaoAlimentacao.toLocaleString("pt-BR", options),
-      inss: inss.toLocaleString("pt-BR", options),
-      liquido: liquido.toLocaleString("pt-BR", options),
-
-      gratificacaoPerc: gratificacaoPerc * 100,
-      fgtsPerc: this.calculadora.p_fgts * 100,
+      remuneracao: {
+        totalBruto: totalBruto.toLocaleString("pt-BR", options),
+        base: base.toLocaleString("pt-BR", options),
+        liquido: liquido.toLocaleString("pt-BR", options),
+        gratificao: gratificao.toLocaleString("pt-BR", options),
+        gratificacaoPerc: gratificacaoPerc * 100,
+      },
+      
+      deducoes: {
+        irpf: irpf.toLocaleString("pt-BR", options),
+        deducaoAlimentacao: deducaoAlimentacao.toLocaleString("pt-BR", options),
+        inss: inss.toLocaleString("pt-BR", options),
+      },
+      
+      outros: {
+        alimentacao: alimentacao.toLocaleString("pt-BR", options),
+        fgts: fgts.toLocaleString("pt-BR", options),
+        fgtsPerc: this.calculadora.p_fgts * 100,
+      },
     };
   }
 }

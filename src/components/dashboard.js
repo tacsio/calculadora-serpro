@@ -19,7 +19,7 @@ export default function Dashboard({ data }) {
                 Total Bruto:
               </dt>
               <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.totalBruto}
+                R$ {data.remuneracao.totalBruto}
               </dd>
             </div>
             
@@ -28,16 +28,16 @@ export default function Dashboard({ data }) {
                 Vencimento Base:
               </dt>
               <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.base}
+                R$ {data.remuneracao.base}
               </dd>
             </div>
 
             <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                Gratificação ({data.gratificacaoPerc}%):
+                Gratificação ({data.remuneracao.gratificacaoPerc}%):
               </dt>
               <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.gratificao}
+                R$ {data.remuneracao.gratificao}
               </dd>
             </div>
           </dl>
@@ -59,7 +59,7 @@ export default function Dashboard({ data }) {
                 IRPF:
               </dt>
               <dd className="mt-1 text-red-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.irpf}
+                R$ {data.deducoes.irpf}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
@@ -67,7 +67,7 @@ export default function Dashboard({ data }) {
                 Alimentacao:
               </dt>
               <dd className="mt-1 text-red-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.deducaoAlimentacao}
+                R$ {data.deducoes.deducaoAlimentacao}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
@@ -75,7 +75,7 @@ export default function Dashboard({ data }) {
                 INSS:
               </dt>
               <dd className="mt-1 text-red-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.inss}
+                R$ {data.deducoes.inss}
               </dd>
             </div>
           </dl>
@@ -97,7 +97,7 @@ export default function Dashboard({ data }) {
                 Líquido:
               </dt>
               <dd className="mt-1 text-sky-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.liquido}
+                R$ {data.remuneracao.liquido}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
@@ -105,16 +105,16 @@ export default function Dashboard({ data }) {
                 Alimentação:
               </dt>
               <dd className="mt-1 text-sky-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.alimentacao}
+                R$ {data.outros.alimentacao}
               </dd>
             </div>
 
             <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                FGTS ({data.fgtsPerc}%):
+                FGTS ({data.outros.fgtsPerc}%):
               </dt>
               <dd className="mt-1 text-sky-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.fgts}
+                R$ {data.outros.fgts}
               </dd>
             </div>
           </dl>
