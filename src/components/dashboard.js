@@ -87,7 +87,7 @@ export default function Dashboard({ data }) {
             Resumo
           </h3>
           <p className="mt-1 max-w-2xl w-64 text-sm text-gray-500">
-            Vencimentos a receber
+            Valores a receber
           </p>
         </div>
         <div className="mt-6 border-t border-gray-100">

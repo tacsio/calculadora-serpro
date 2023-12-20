@@ -100,7 +100,7 @@ export default function CalcForm({ setData }) {
                 htmlFor="classe"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Classe
+                Gratificação Profissional
               </label>
               <div className="mt-2">
                 <select
