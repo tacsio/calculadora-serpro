@@ -10,10 +10,22 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.github_banner {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  padding: 10px 50px 10px 10px;
+  color: #fff;
+  background: url(/github-mark-white.png) rgb(12, 174, 255) no-repeat 94% 47%;
+  background-size: 16%;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 2px;
 }
