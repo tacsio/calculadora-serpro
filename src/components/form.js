@@ -1,4 +1,22 @@
-export default function CalcForm({ pgps }) {
+"use client";
+
+import { PGPS } from "@/service/pgps";
+import { useEffect, useState } from "react";
+
+export default function CalcForm({ setData }) {
+  const pgps = new PGPS();
+
+  const [nivel, setNivel] = useState(101);
+  const [degrau, setDegrau] = useState("A");
+  const [classe, setClasse] = useState("Classe I");
+
+  useEffect(() => {
+    console.log("EFFECT")
+    console.log(nivel, degrau, classe);
+    const result = pgps.calculate({ nivel, degrau, classe });
+    setData(result);
+  }, [nivel, degrau, classe]);
+
   return (
     <form>
       <div className="space-y-12">
@@ -42,6 +60,8 @@ export default function CalcForm({ pgps }) {
                   name="nivel"
                   autoComplete="nivel-name"
                   className="block w-24 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  onChange={(event) => setNivel(event.target.value)}
+                  value={nivel}
                 >
                   {pgps.niveis.map((value, index) => (
                     <option className="text-center" key={index}>
@@ -65,6 +85,8 @@ export default function CalcForm({ pgps }) {
                   name="degrau"
                   autoComplete="degrau-name"
                   className="block w-24 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  onChange={(event) => setDegrau(event.target.value)}
+                  value={degrau}
                 >
                   {pgps.degraus.map((value, index) => (
                     <option className="text-center" key={index}>
@@ -88,6 +110,8 @@ export default function CalcForm({ pgps }) {
                   name="classe"
                   autoComplete="classe-name"
                   className="block w-32 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  onChange={(event) => setClasse(event.target.value)}
+                  value={classe}
                 >
                   {pgps.gratificaoes.map((value, index) => (
                     <option className="text-center" key={index}>

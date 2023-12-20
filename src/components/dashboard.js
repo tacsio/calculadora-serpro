@@ -1,3 +1,5 @@
+"use client";
+
 export default function Dashboard({ data }) {
   return (
     <div className="flex flex-wrap align-center justify-center mt-4">
@@ -14,20 +16,22 @@ export default function Dashboard({ data }) {
           <dl className="divide-y divide-gray-100">
             <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                Vencimento Base:
-              </dt>
-              <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.base}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
                 Total Bruto:
               </dt>
               <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
                 R$ {data.totalBruto}
               </dd>
             </div>
+            
+            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                Vencimento Base:
+              </dt>
+              <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
+                R$ {data.base}
+              </dd>
+            </div>
+
             <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
                 Gratificação ({data.gratificacaoPerc}%):
