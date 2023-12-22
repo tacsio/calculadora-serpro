@@ -1,122 +1,83 @@
 "use client";
 
+import CardHeader from "./card-header";
+import CardItem from "./card-item";
+
 export default function Dashboard({ data }) {
   return (
     <div className="flex flex-wrap align-center justify-center mt-4">
       <div className="py-2 px-4 m-2 border-2 rounded-lg border-slate-300">
-        <div className="px-4 sm:px-0">
-          <h3 className="text-base font-semibold leading-7 text-gray-900">
-            Remuneração
-          </h3>
-          <p className="mt-1 max-w-2xl w-64 text-sm text-gray-500">
-            Detalhes da remuneração
-          </p>
-        </div>
+        <CardHeader title="Remuneração" subtitle="Detalhes da remuneração" />
+
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Total Bruto:
-              </dt>
-              <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.remuneracao.totalBruto}
-              </dd>
-            </div>
-            
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Vencimento Base:
-              </dt>
-              <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.remuneracao.base}
-              </dd>
-            </div>
+            <CardItem
+              title="Total Bruto:"
+              value={`R$ ${data.remuneracao.totalBruto}`}
+              colorClass="text-emerald-600"
+            />
 
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Gratificação ({data.remuneracao.gratificacaoPerc}%):
-              </dt>
-              <dd className="mt-1 text-emerald-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.remuneracao.gratificao}
-              </dd>
-            </div>
+            <CardItem
+              title="Vencimento Base:"
+              value={`R$ ${data.remuneracao.base}`}
+              colorClass="text-emerald-600"
+            />
+
+            <CardItem
+              title={`Gratificação (${data.remuneracao.gratificacaoPerc}%):`}
+              value={`R$ ${data.remuneracao.gratificao}`}
+              colorClass="text-emerald-600"
+            />
           </dl>
         </div>
       </div>
       <div className="py-2 px-4 m-2 border-2 rounded-lg border-slate-300">
-        <div className="px-4 sm:px-0">
-          <h3 className="text-base font-semibold leading-7 text-gray-900">
-            Deduções
-          </h3>
-          <p className="mt-1 max-w-2xl w-64 text-sm text-gray-500">
-            Detalhes das deduções
-          </p>
-        </div>
+        <CardHeader title="Deduções" subtitle="Detalhes das deduções" />
+
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                IRPF:
-              </dt>
-              <dd className="mt-1 text-red-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.deducoes.irpf}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Alimentacao:
-              </dt>
-              <dd className="mt-1 text-red-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.deducoes.deducaoAlimentacao}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                INSS:
-              </dt>
-              <dd className="mt-1 text-red-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.deducoes.inss}
-              </dd>
-            </div>
+            <CardItem
+              title="IRPF:"
+              value={`R$ ${data.deducoes.irpf}`}
+              colorClass="text-red-600"
+            />
+
+            <CardItem
+              title="Alimentacao:"
+              value={`R$ ${data.deducoes.deducaoAlimentacao}`}
+              colorClass="text-red-600"
+            />
+
+            <CardItem
+              title="INSS:"
+              value={`R$ ${data.deducoes.inss}`}
+              colorClass="text-red-600"
+            />
           </dl>
         </div>
       </div>
       <div className="py-2 px-4 m-2 border-2 rounded-lg border-slate-300">
-        <div className="px-4 sm:px-0">
-          <h3 className="text-base font-semibold leading-7 text-gray-900">
-            Resumo
-          </h3>
-          <p className="mt-1 max-w-2xl w-64 text-sm text-gray-500">
-            Valores a receber
-          </p>
-        </div>
+        <CardHeader title="Resumo" subtitle="Valores a receber" />
+
         <div className="mt-6 border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Líquido:
-              </dt>
-              <dd className="mt-1 text-sky-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.remuneracao.liquido}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Alimentação:
-              </dt>
-              <dd className="mt-1 text-sky-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.outros.alimentacao}
-              </dd>
-            </div>
+            <CardItem
+              title="Líquido:"
+              value={`R$ ${data.remuneracao.liquido}`}
+              colorClass="text-sky-600"
+            />
 
-            <div className="px-4 py-6 sm:grid sm:grid-rows-2 sm:gap-2 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                FGTS ({data.outros.fgtsPerc}%):
-              </dt>
-              <dd className="mt-1 text-sky-600 font-semibold text-sm leading-6 sm:col-span-2 sm:mt-0">
-                R$ {data.outros.fgts}
-              </dd>
-            </div>
+            <CardItem
+              title="Alimentação:"
+              value={`R$ ${data.outros.alimentacao}`}
+              colorClass="text-sky-600"
+            />
+
+            <CardItem
+              title={`FGTS (${data.outros.fgtsPerc}%):`}
+              value={`R$ ${data.outros.fgts}`}
+              colorClass="text-sky-600"
+            />
           </dl>
         </div>
       </div>
