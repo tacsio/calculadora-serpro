@@ -9,18 +9,24 @@ export class PGCS {
     this.calculadora = new Calculadora();
   }
 
-  calculate({ nivel, classe, degrau }) {
-    const base = this.calculadora.calcularBase(this.niveis[0], nivel, degrau);
+  calculate({ nivel, classe, degrau, reajuste }) {
+    let base = this.calculadora.calcularBase(this.niveis[0], nivel, degrau);
+    let alimentacao = this.calculadora.alimentacao;
+
+    if (reajuste) {
+      base = this.calculadora.aplicarReajuste(base, reajuste);
+      alimentacao = this.calculadora.aplicarReajuste(alimentacao, reajuste);
+    }
+
     const gratificao = this.calculadora.calcularGratificacao(classe, base);
     const gratificacaoPerc = this.calculadora.p_gratificacao[classe];
     const totalBruto = base + gratificao;
 
-    const alimentacao = this.calculadora.alimentacao;
     const fgts = this.calculadora.calcularFGTS(totalBruto);
 
     //DEDUCOES
     const irpf = this.calculadora.calcularIRPF(totalBruto);
-    const deducaoAlimentacao = this.calculadora.calcularDeducaoAlimentacao();
+    const deducaoAlimentacao = this.calculadora.calcularDeducaoAlimentacao(alimentacao);
     const inss = this.calculadora.inss;
 
     const liquido = totalBruto - irpf - deducaoAlimentacao - inss;
@@ -35,13 +41,13 @@ export class PGCS {
         gratificao: gratificao.toLocaleString("pt-BR", options),
         gratificacaoPerc: gratificacaoPerc * 100,
       },
-      
+
       deducoes: {
         irpf: irpf.toLocaleString("pt-BR", options),
         deducaoAlimentacao: deducaoAlimentacao.toLocaleString("pt-BR", options),
         inss: inss.toLocaleString("pt-BR", options),
       },
-      
+
       outros: {
         alimentacao: alimentacao.toLocaleString("pt-BR", options),
         fgts: fgts.toLocaleString("pt-BR", options),

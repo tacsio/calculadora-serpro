@@ -41,8 +41,8 @@ export class Calculadora {
     return base * this.p_gratificacao[classe];
   }
 
-  calcularDeducaoAlimentacao() {
-    return this.alimentacao * this.p_alimentacao;
+  calcularDeducaoAlimentacao(alimentacao) {
+    return alimentacao * this.p_alimentacao;
   }
 
   /** IRPF **/
@@ -56,5 +56,9 @@ export class Calculadora {
 
   calcularFGTS(totalBruto) {
     return totalBruto * this.p_fgts;
+  }
+
+  aplicarReajuste(valor, percentual) {
+    return valor * (1 + percentual / 100);
   }
 }

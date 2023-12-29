@@ -10,10 +10,12 @@ export default function CalcForm({ setData }) {
   const [degrau, setDegrau] = useState("A");
   const [classe, setClasse] = useState("Classe I");
 
+  const [reajuste, setReajuste] = useState("");
+
   useEffect(() => {
-    const result = pgcs.calculate({ nivel, degrau, classe });
+    const result = pgcs.calculate({ nivel, degrau, classe, reajuste });
     setData(result);
-  }, [nivel, degrau, classe, setData]);
+  }, [nivel, degrau, classe, setData, reajuste]);
 
   return (
     <form>
@@ -117,6 +119,35 @@ export default function CalcForm({ setData }) {
                     </option>
                   ))}
                 </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-b border-gray-900/10 pb-12">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">
+            Simulação
+          </h2>
+          <p className="mt-1 text-sm leading-6 text-gray-600">
+            Configurações de parâmetros de simulação de reajustes
+          </p>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="nivel"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Reajuste (%)
+              </label>
+              <div className="mt-2 w-24">
+                <input
+                  type="number"
+                  min={0}
+                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={(event) => setReajuste(event.target.value)}
+                  value={reajuste}
+                />
               </div>
             </div>
           </div>
