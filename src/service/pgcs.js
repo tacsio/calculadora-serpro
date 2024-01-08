@@ -19,15 +19,16 @@ export class PGCS {
   calculate({ nivel, classe, degrau, gfeIndex = 0, reajuste }) {
     let base = this.calculadora.calcularBase(this.niveis[0], nivel, degrau);
     let alimentacao = this.calculadora.alimentacao;
+    let gfe = this.gfe[gfeIndex];
 
     if (reajuste) {
       base = this.calculadora.aplicarReajuste(base, reajuste);
       alimentacao = this.calculadora.aplicarReajuste(alimentacao, reajuste);
+      gfe = this.calculadora.aplicarReajuste(gfe, reajuste);
     }
 
     const gratificao = this.calculadora.calcularGratificacao(classe, base);
     const gratificacaoPerc = this.calculadora.p_gratificacao[classe];
-    const gfe = this.gfe[gfeIndex];
     const totalBruto = base + gratificao + gfe;
 
     const fgts = this.calculadora.calcularFGTS(totalBruto);
