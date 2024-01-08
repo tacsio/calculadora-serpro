@@ -9,13 +9,14 @@ export default function CalcForm({ setData }) {
   const [nivel, setNivel] = useState(101);
   const [degrau, setDegrau] = useState("A");
   const [classe, setClasse] = useState("Classe I");
+  const [gfeIndex, setGfeIndex] = useState(0);
 
   const [reajuste, setReajuste] = useState("");
 
   useEffect(() => {
-    const result = pgcs.calculate({ nivel, degrau, classe, reajuste });
+    const result = pgcs.calculate({ nivel, degrau, classe, reajuste, gfeIndex });
     setData(result);
-  }, [nivel, degrau, classe, setData, reajuste]);
+  }, [nivel, degrau, classe, setData, reajuste, gfeIndex]);
 
   return (
     <form>
@@ -38,6 +39,7 @@ export default function CalcForm({ setData }) {
           </p>
         </div>
 
+        {/* Carreira */}
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Carreira
@@ -97,12 +99,12 @@ export default function CalcForm({ setData }) {
               </div>
             </div>
 
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-1">
               <label
                 htmlFor="classe"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Gratificação Profissional
+                Gratificação
               </label>
               <div className="mt-2">
                 <select
@@ -121,9 +123,35 @@ export default function CalcForm({ setData }) {
                 </select>
               </div>
             </div>
+            
+            <div className="sm:col-span-2">
+              <label
+                htmlFor="gfe"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                GFE
+              </label>
+              <div className="mt-2">
+                <select
+                  id="gfe"
+                  name="gfe"
+                  autoComplete="gfe-name"
+                  className="block w-32 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  onChange={(event) => setGfeIndex(event.target.value)}
+                  value={gfeIndex}
+                >
+                  {pgcs.gfe.map((value, index) => (
+                    <option className="text-center" key={index}>
+                      {index}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </div>
         </div>
 
+        {/* Simulacao */}
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Simulação

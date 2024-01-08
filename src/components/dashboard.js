@@ -28,6 +28,12 @@ export default function Dashboard({ data }) {
               value={`R$ ${data.remuneracao.gratificao}`}
               colorClass="text-emerald-600"
             />
+
+            <CardItem
+              title={`GFE:`}
+              value={`R$ ${data.remuneracao.gfe}`}
+              colorClass="text-emerald-600"
+            />
           </dl>
         </div>
       </div>
