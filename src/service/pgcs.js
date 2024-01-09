@@ -13,23 +13,30 @@ export class PGCS {
       6381.49, 6917.57, 7498.6, 8128.49, 8811.3, 9551.43, 10353.74,
     ];
 
+    this.gfc = [
+      0, 3630.8, 4290.93, 4951.06, 6601.43, 6931.5, 7261.6, 7591.62, 9242.04,
+      9902.17, 10562.29, 12542.75, 12872.81, 13202.89, 15513.39, 17493.78,
+    ];
+
     this.calculadora = new Calculadora();
   }
 
-  calculate({ nivel, classe, degrau, gfeIndex = 0, reajuste }) {
+  calculate({ nivel, classe, degrau, gfeIndex = 0, gfcIndex = 0, reajuste }) {
     let base = this.calculadora.calcularBase(this.niveis[0], nivel, degrau);
     let alimentacao = this.calculadora.alimentacao;
     let gfe = this.gfe[gfeIndex];
+    let gfc = this.gfc[gfcIndex];
 
     if (reajuste) {
       base = this.calculadora.aplicarReajuste(base, reajuste);
       alimentacao = this.calculadora.aplicarReajuste(alimentacao, reajuste);
       gfe = this.calculadora.aplicarReajuste(gfe, reajuste);
+      gfc = this.calculadora.aplicarReajuste(gfc, reajuste);
     }
 
     const gratificao = this.calculadora.calcularGratificacao(classe, base);
     const gratificacaoPerc = this.calculadora.p_gratificacao[classe];
-    const totalBruto = base + gratificao + gfe;
+    const totalBruto = base + gratificao + gfe + gfc;
 
     const fgts = this.calculadora.calcularFGTS(totalBruto);
 
@@ -41,29 +48,33 @@ export class PGCS {
 
     const liquido = totalBruto - irpf - deducaoAlimentacao - inss;
 
-    const options = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
-
     return {
       remuneracao: {
-        totalBruto: totalBruto.toLocaleString("pt-BR", options),
-        base: base.toLocaleString("pt-BR", options),
-        liquido: liquido.toLocaleString("pt-BR", options),
-        gratificao: gratificao.toLocaleString("pt-BR", options),
+        totalBruto: this._formatNumber(totalBruto),
+        base: this._formatNumber(base),
+        liquido: this._formatNumber(liquido),
+        gratificao: this._formatNumber(gratificao),
         gratificacaoPerc: gratificacaoPerc * 100,
-        gfe: gfe.toLocaleString("pt-BR", options),
+        gfe: this._formatNumber(gfe),
+        gfc: this._formatNumber(gfc),
       },
 
       deducoes: {
-        irpf: irpf.toLocaleString("pt-BR", options),
-        deducaoAlimentacao: deducaoAlimentacao.toLocaleString("pt-BR", options),
-        inss: inss.toLocaleString("pt-BR", options),
+        irpf: this._formatNumber(irpf),
+        deducaoAlimentacao: this._formatNumber(deducaoAlimentacao),
+        inss: this._formatNumber(inss),
       },
 
       outros: {
-        alimentacao: alimentacao.toLocaleString("pt-BR", options),
-        fgts: fgts.toLocaleString("pt-BR", options),
+        alimentacao: this._formatNumber(alimentacao),
+        fgts: this._formatNumber(fgts),
         fgtsPerc: this.calculadora.p_fgts * 100,
       },
     };
+  }
+
+  _formatNumber(value) {
+    const options = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    return value.toLocaleString("pt-BR", options);
   }
 }

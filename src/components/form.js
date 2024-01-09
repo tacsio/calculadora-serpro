@@ -10,13 +10,21 @@ export default function CalcForm({ setData }) {
   const [degrau, setDegrau] = useState("A");
   const [classe, setClasse] = useState("Classe I");
   const [gfeIndex, setGfeIndex] = useState(0);
+  const [gfcIndex, setGfcIndex] = useState(0);
 
   const [reajuste, setReajuste] = useState("");
 
   useEffect(() => {
-    const result = pgcs.calculate({ nivel, degrau, classe, reajuste, gfeIndex });
+    const result = pgcs.calculate({
+      nivel,
+      degrau,
+      classe,
+      reajuste,
+      gfeIndex,
+      gfcIndex,
+    });
     setData(result);
-  }, [nivel, degrau, classe, setData, reajuste, gfeIndex]);
+  }, [nivel, degrau, classe, setData, reajuste, gfeIndex, gfcIndex]);
 
   return (
     <form>
@@ -37,6 +45,7 @@ export default function CalcForm({ setData }) {
             Não me responsabilizo por eventuais diferenças entre a simulação e
             os valores reais.
           </p>
+          <a className="text-xs text-blue-500" href="https://www.transparencia.serpro.gov.br/acesso-a-informacao/servidores/carreiras">https://www.transparencia.serpro.gov.br/acesso-a-informacao/servidores/carreiras</a>
         </div>
 
         {/* Carreira */}
@@ -123,8 +132,20 @@ export default function CalcForm({ setData }) {
                 </select>
               </div>
             </div>
-            
-            <div className="sm:col-span-2">
+          </div>
+        </div>
+
+        {/* Extras */}
+        <div className="border-b border-gray-900/10 pb-12">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">
+            Extras
+          </h2>
+          <p className="mt-1 text-sm leading-6 text-gray-600">
+            Configurações de parâmetros extras
+          </p>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-1">
               <label
                 htmlFor="gfe"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -141,6 +162,31 @@ export default function CalcForm({ setData }) {
                   value={gfeIndex}
                 >
                   {pgcs.gfe.map((value, index) => (
+                    <option className="text-center" key={index}>
+                      {index}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="gfc"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                GFC
+              </label>
+              <div className="mt-2">
+                <select
+                  id="gfc"
+                  name="gfc"
+                  autoComplete="gfc-name"
+                  className="block w-32 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  onChange={(event) => setGfcIndex(event.target.value)}
+                  value={gfcIndex}
+                >
+                  {pgcs.gfc.map((value, index) => (
                     <option className="text-center" key={index}>
                       {index}
                     </option>
