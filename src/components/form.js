@@ -2,6 +2,7 @@
 
 import { PGCS } from "@/service/pgcs";
 import { useEffect, useState } from "react";
+import PlanoSaudeForm from "./plano-saude-form";
 
 const pgcs = new PGCS();
 
@@ -12,6 +13,7 @@ export default function CalcForm({ setData }) {
   const [gfeIndex, setGfeIndex] = useState(0);
   const [gfcIndex, setGfcIndex] = useState(0);
 
+  const [idade, setIdade] = useState(undefined);
   const [reajuste, setReajuste] = useState("");
 
   useEffect(() => {
@@ -22,9 +24,10 @@ export default function CalcForm({ setData }) {
       reajuste,
       gfeIndex,
       gfcIndex,
+      idade,
     });
     setData(result);
-  }, [nivel, degrau, classe, setData, reajuste, gfeIndex, gfcIndex]);
+  }, [nivel, degrau, classe, setData, reajuste, gfeIndex, gfcIndex, idade]);
 
   return (
     <form>
@@ -45,7 +48,22 @@ export default function CalcForm({ setData }) {
             Não me responsabilizo por eventuais diferenças entre a simulação e
             os valores reais.
           </p>
-          <a className="text-xs text-blue-500" href="https://www.transparencia.serpro.gov.br/acesso-a-informacao/servidores/carreiras">https://www.transparencia.serpro.gov.br/acesso-a-informacao/servidores/carreiras</a>
+          <p>
+            <a
+              className="text-xs text-blue-500"
+              href="https://www.transparencia.serpro.gov.br/acesso-a-informacao/servidores/carreiras"
+            >
+              https://www.transparencia.serpro.gov.br/acesso-a-informacao/servidores/carreiras
+            </a>
+          </p>
+          <p>
+            <a
+              className="text-xs text-blue-500"
+              href="https://www.passerpro.qualirede.com.br/regulamentos/"
+            >
+              https://www.passerpro.qualirede.com.br/regulamentos/
+            </a>
+          </p>
         </div>
 
         {/* Carreira */}
@@ -197,6 +215,8 @@ export default function CalcForm({ setData }) {
           </div>
         </div>
 
+        <PlanoSaudeForm idade={idade} setIdade={setIdade} />
+
         {/* Simulacao */}
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -209,13 +229,15 @@ export default function CalcForm({ setData }) {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-1">
               <label
-                htmlFor="nivel"
+                htmlFor="reajuste"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Reajuste (%)
               </label>
               <div className="mt-2 w-24">
                 <input
+                  id="reajuste"
+                  name="reajuste"
                   type="number"
                   min={0}
                   className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
