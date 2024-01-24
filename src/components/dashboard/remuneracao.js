@@ -27,13 +27,13 @@ export default function Remuneracao({ remuneracao }) {
         />
 
         <CardItem
-          title={`GFE:`}
+          title={`GFE (${remuneracao.gfeIndex}): `}
           value={`R$ ${remuneracao.gfe}`}
           colorClass="text-emerald-600"
         />
 
         <CardItem
-          title={`GFC:`}
+          title={`GFC: (${remuneracao.gfcIndex})`}
           value={`R$ ${remuneracao.gfc}`}
           colorClass="text-emerald-600"
         />

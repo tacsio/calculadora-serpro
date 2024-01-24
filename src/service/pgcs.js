@@ -23,7 +23,15 @@ export class PGCS {
     this.planoSaude = new PlanoSaude();
   }
 
-  calculate({ nivel, classe, degrau, gfeIndex = 0, gfcIndex = 0, reajuste, idade }) {
+  calculate({
+    nivel,
+    classe,
+    degrau,
+    gfeIndex = 0,
+    gfcIndex = 0,
+    reajuste,
+    idade,
+  }) {
     let base = this.calculadora.calcularBase(this.niveis[0], nivel, degrau);
     let alimentacao = this.calculadora.alimentacao;
     let gfe = this.gfe[gfeIndex];
@@ -37,9 +45,9 @@ export class PGCS {
       gfc = this.calculadora.aplicarReajuste(gfc, reajuste);
     }
 
-    if(idade) {
-     const dadosPlano = this.planoSaude.calculate({idade, nivel});
-     decontoPlanoSaude = dadosPlano.desconto;
+    if (idade) {
+      const dadosPlano = this.planoSaude.calculate({ idade, nivel });
+      decontoPlanoSaude = dadosPlano.desconto;
     }
 
     const gratificao = this.calculadora.calcularGratificacao(classe, base);
@@ -54,7 +62,8 @@ export class PGCS {
       this.calculadora.calcularDeducaoAlimentacao(alimentacao);
     const inss = this.calculadora.inss;
 
-    const liquido = totalBruto - irpf - deducaoAlimentacao - inss - decontoPlanoSaude;
+    const liquido =
+      totalBruto - irpf - deducaoAlimentacao - inss - decontoPlanoSaude;
 
     return {
       remuneracao: {
@@ -64,14 +73,16 @@ export class PGCS {
         gratificao: this._formatNumber(gratificao),
         gratificacaoPerc: gratificacaoPerc * 100,
         gfe: this._formatNumber(gfe),
+        gfeIndex: gfeIndex,
         gfc: this._formatNumber(gfc),
+        gfcIndex: gfcIndex,
       },
 
       deducoes: {
         irpf: this._formatNumber(irpf),
         deducaoAlimentacao: this._formatNumber(deducaoAlimentacao),
         inss: this._formatNumber(inss),
-        planoSaude: this._formatNumber(decontoPlanoSaude)
+        planoSaude: this._formatNumber(decontoPlanoSaude),
       },
 
       outros: {
