@@ -31,6 +31,12 @@ export default function Deducoes({ deducoes }) {
             value={`R$ ${deducoes.planoSaude}`}
             colorClass="text-red-600"
           />
+
+          <CardItem
+            title="Serpros:"
+            value={`R$ ${deducoes.serpros}`}
+            colorClass="text-red-600"
+          />
         </dl>
       </div>
     </div>
