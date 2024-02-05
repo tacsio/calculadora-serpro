@@ -13,6 +13,7 @@ export default function CalcForm({ setData }) {
   const [classe, setClasse] = useState("Classe I");
   const [gfeIndex, setGfeIndex] = useState(0);
   const [gfcIndex, setGfcIndex] = useState(0);
+  const [checkAlimentacao, setChekAlimentacao] = useState(true);
 
   const [idade, setIdade] = useState(undefined);
   const [contribuicaoSerpros, setContribuicaoSerpros] = useState(undefined);
@@ -29,6 +30,7 @@ export default function CalcForm({ setData }) {
       gfcIndex,
       idade,
       contribuicaoSerpros,
+      checkAlimentacao,
     });
     setData(result);
   }, [
@@ -41,6 +43,7 @@ export default function CalcForm({ setData }) {
     gfcIndex,
     idade,
     contribuicaoSerpros,
+    checkAlimentacao,
   ]);
 
   return (
@@ -235,6 +238,24 @@ export default function CalcForm({ setData }) {
                     </option>
                   ))}
                 </select>
+              </div>
+            </div>
+
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="alimentacao"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Alimentação
+              </label>
+              <div className="mt-2 w-24">
+                <input
+                  id="alimentacao"
+                  type="checkbox"
+                  checked={checkAlimentacao}
+                  value={checkAlimentacao}
+                  onChange={(e) => setChekAlimentacao(!checkAlimentacao)}
+                />
               </div>
             </div>
           </div>
