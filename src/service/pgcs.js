@@ -42,13 +42,6 @@ export class PGCS {
     let alimentacao = 0;
     let deducaoAlimentacao = 0.0;
 
-    if (reajuste) {
-      base = this.calculadora.aplicarReajuste(base, reajuste);
-      alimentacao = this.calculadora.aplicarReajuste(alimentacao, reajuste);
-      gfe = this.calculadora.aplicarReajuste(gfe, reajuste);
-      gfc = this.calculadora.aplicarReajuste(gfc, reajuste);
-    }
-
     //alimentacao
     if (checkAlimentacao) {
       alimentacao = this.calculadora.alimentacao;
@@ -65,6 +58,14 @@ export class PGCS {
     //SERPROS
     if (contribuicaoSerpros) {
       descontoSerpros = contribuicaoSerpros;
+    }
+    
+    //REAJUSTE
+    if (reajuste) {
+      base = this.calculadora.aplicarReajuste(base, reajuste);
+      alimentacao = this.calculadora.aplicarReajuste(alimentacao, reajuste);
+      gfe = this.calculadora.aplicarReajuste(gfe, reajuste);
+      gfc = this.calculadora.aplicarReajuste(gfc, reajuste);
     }
 
     const gratificao = this.calculadora.calcularGratificacao(classe, base);
