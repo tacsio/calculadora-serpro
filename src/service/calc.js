@@ -11,9 +11,9 @@ export class Calculadora {
     this.p_fgts = 0.08;
 
     //IRPF
-    this.inss = 876.97;
+    this.inss = 908.85;
     this.alicotaIR = 0.275;
-    this.baseDeducao = 884.96;
+    this.baseDeducao = 896.00;
 
     //GRATIFICACAO
     this.p_gratificacao = {
@@ -46,8 +46,8 @@ export class Calculadora {
   }
 
   /** IRPF **/
-  calcularIRPF(totalBruto) {
-    let result = totalBruto - this.inss;
+  calcularIRPF(totalBruto, desconto=0) {
+    let result = totalBruto - this.inss -desconto;
     result *= this.alicotaIR;
     result -= this.baseDeducao;
 

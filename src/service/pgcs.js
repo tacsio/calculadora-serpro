@@ -75,7 +75,7 @@ export class PGCS {
     const fgts = this.calculadora.calcularFGTS(totalBruto);
 
     //DEDUCOES
-    const irpf = this.calculadora.calcularIRPF(totalBruto);
+    const irpf = this.calculadora.calcularIRPF(totalBruto, descontoSerpros);
     const inss = this.calculadora.inss;
 
     const liquido =

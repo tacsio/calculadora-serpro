@@ -7,7 +7,7 @@ export default function SerprosForm({ contribuicaoSerpros, setContribuicaoSerpro
     if (checkSerpros) {
       setContribuicaoSerpros(undefined);
     } else {
-      setContribuicaoSerpros(433.78);
+      setContribuicaoSerpros(443.78);
     }
     setCheckSerpros(!checkSerpros);
   }
