@@ -59,7 +59,7 @@ export class PGCS {
     if (contribuicaoSerpros) {
       descontoSerpros = contribuicaoSerpros;
     }
-    
+
     //REAJUSTE
     if (reajuste) {
       base = this.calculadora.aplicarReajuste(base, reajuste);
@@ -77,6 +77,7 @@ export class PGCS {
     //DEDUCOES
     const irpf = this.calculadora.calcularIRPF(totalBruto, descontoSerpros);
     const inss = this.calculadora.inss;
+    const totalDeducoes = irpf+deducaoAlimentacao+inss+decontoPlanoSaude+descontoSerpros;
 
     const liquido =
       totalBruto -
@@ -88,7 +89,6 @@ export class PGCS {
 
     return {
       remuneracao: {
-        totalBruto: this._formatNumber(totalBruto),
         base: this._formatNumber(base),
         liquido: this._formatNumber(liquido),
         gratificao: this._formatNumber(gratificao),
@@ -97,6 +97,7 @@ export class PGCS {
         gfeIndex: gfeIndex,
         gfc: this._formatNumber(gfc),
         gfcIndex: gfcIndex,
+        resumo: this._formatNumber(totalBruto),
       },
 
       deducoes: {
@@ -105,6 +106,7 @@ export class PGCS {
         inss: this._formatNumber(inss),
         planoSaude: this._formatNumber(decontoPlanoSaude),
         serpros: this._formatNumber(descontoSerpros),
+        resumo: this._formatNumber(totalDeducoes),
       },
 
       outros: {
@@ -112,6 +114,8 @@ export class PGCS {
         fgts: this._formatNumber(fgts),
         fgtsPerc: this.calculadora.p_fgts * 100,
       },
+
+      totais: this._formatNumber(liquido + alimentacao),
     };
   }
 
