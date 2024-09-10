@@ -1,5 +1,6 @@
 import { Calculadora } from "./calc";
 import { PlanoSaude } from "./plano-saude";
+import { Serpros } from "./serpros";
 
 export class PGCS {
   constructor() {
@@ -21,6 +22,7 @@ export class PGCS {
 
     this.calculadora = new Calculadora();
     this.planoSaude = new PlanoSaude();
+    this.serpros = new Serpros();
   }
 
   calculate({
@@ -31,7 +33,8 @@ export class PGCS {
     gfcIndex = 0,
     reajuste,
     idade,
-    contribuicaoSerpros,
+    percentualSerpros,
+    idadeSerpros,
     checkAlimentacao,
   }) {
     let base = this.calculadora.calcularBase(this.niveis[0], nivel, degrau);
@@ -56,8 +59,10 @@ export class PGCS {
     }
 
     //SERPROS
-    if (contribuicaoSerpros) {
-      descontoSerpros = contribuicaoSerpros;
+    if (idadeSerpros) {
+      const salarioContribuicao = base + gfe + gfc;
+      const dadosSerpros = this.serpros.calculate({idade, percentualSerpros, salarioContribuicao});
+      descontoSerpros = dadosSerpros.desconto;
     }
 
     //REAJUSTE

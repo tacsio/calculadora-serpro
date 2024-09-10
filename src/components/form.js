@@ -16,7 +16,8 @@ export default function CalcForm({ setData }) {
   const [checkAlimentacao, setChekAlimentacao] = useState(true);
 
   const [idade, setIdade] = useState(undefined);
-  const [contribuicaoSerpros, setContribuicaoSerpros] = useState(undefined);
+  const [percentualSerpros, setPercentualSerpros] = useState(undefined);
+  const [idadeSerpros, setIdadeSerpros] = useState(undefined);
 
   const [reajuste, setReajuste] = useState("");
 
@@ -29,7 +30,8 @@ export default function CalcForm({ setData }) {
       gfeIndex,
       gfcIndex,
       idade,
-      contribuicaoSerpros,
+      percentualSerpros,
+      idadeSerpros,
       checkAlimentacao,
     });
     setData(result);
@@ -42,7 +44,8 @@ export default function CalcForm({ setData }) {
     gfeIndex,
     gfcIndex,
     idade,
-    contribuicaoSerpros,
+    percentualSerpros,
+    idadeSerpros,
     checkAlimentacao,
   ]);
 
@@ -264,8 +267,10 @@ export default function CalcForm({ setData }) {
         <PlanoSaudeForm idade={idade} setIdade={setIdade} />
 
         <SerprosForm
-          contribuicaoSerpros={contribuicaoSerpros}
-          setContribuicaoSerpros={setContribuicaoSerpros}
+          percentualSerpros={percentualSerpros}
+          setPercentualSerpros={setPercentualSerpros}
+          idadeSerpros={idadeSerpros}
+          setIdadeSerpros={setIdadeSerpros}
         />
 
         {/* Simulacao */}

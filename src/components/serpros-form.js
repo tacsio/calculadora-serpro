@@ -1,13 +1,15 @@
 import { useState } from "react";
 
-export default function SerprosForm({ contribuicaoSerpros, setContribuicaoSerpros }) {
+export default function SerprosForm({ percentualSerpros, setPercentualSerpros, idadeSerpros, setIdadeSerpros }) {
   const [checkSerpros, setCheckSerpros] = useState(false);
 
   function toggle() {
     if (checkSerpros) {
-      setContribuicaoSerpros(undefined);
+      setPercentualSerpros(undefined);
+      setIdadeSerpros(undefined);
     } else {
-      setContribuicaoSerpros(443.78);
+      setPercentualSerpros(15);
+      setIdadeSerpros(18);
     }
     setCheckSerpros(!checkSerpros);
   }
@@ -42,20 +44,39 @@ export default function SerprosForm({ contribuicaoSerpros, setContribuicaoSerpro
         {checkSerpros && (
           <div className="sm:col-span-1">
             <label
-              htmlFor="contribuicao"
+              htmlFor="percentual"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Contribução Participante
+              Contribução Variável
             </label>
             <div className="mt-2 w-24">
               <input
-                id="contribuicao"
-                name="contribuicao"
+                id="percentual"
+                name="percentual"
                 type="number"
                 min={0}
+                max={15}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={(event) => setContribuicaoSerpros(Number(event.target.value))}
-                value={contribuicaoSerpros}
+                onChange={(event) => setPercentualSerpros(Number(event.target.value))}
+                value={percentualSerpros}
+              />
+            </div>
+            <label
+              htmlFor="idadeAdesao"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Idade na Adesão
+            </label>
+            <div className="mt-2 w-24">
+            <input
+                id="idadeAdesao"
+                name="idadeAdesao"
+                type="number"
+                min={18}
+                max={65}
+                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                onChange={(event) => setIdadeSerpros(Number(event.target.value))}
+                value={idadeSerpros}
               />
             </div>
           </div>
