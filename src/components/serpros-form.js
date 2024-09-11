@@ -9,7 +9,7 @@ export default function SerprosForm({ percentualSerpros, setPercentualSerpros, i
       setIdadeSerpros(undefined);
     } else {
       setPercentualSerpros(15);
-      setIdadeSerpros(18);
+      setIdadeSerpros(27);
     }
     setCheckSerpros(!checkSerpros);
   }
@@ -17,7 +17,7 @@ export default function SerprosForm({ percentualSerpros, setPercentualSerpros, i
   return (
     <div className="border-b border-gray-900/10 pb-12">
       <h2 className="text-base font-semibold leading-7 text-gray-900">
-        Serpos PS-II
+        Serpros PS-II
       </h2>
       <p className="mt-1 text-sm leading-6 text-gray-600">
         Configurações de Serpros
@@ -61,6 +61,10 @@ export default function SerprosForm({ percentualSerpros, setPercentualSerpros, i
                 value={percentualSerpros}
               />
             </div>
+          </div>
+        )}
+        {checkSerpros && (
+          <div className="sm:col-span-1">
             <label
               htmlFor="idadeAdesao"
               className="block text-sm font-medium leading-6 text-gray-900"

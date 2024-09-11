@@ -38,6 +38,7 @@ export class PGCS {
     checkAlimentacao,
   }) {
     let base = this.calculadora.calcularBase(this.niveis[0], nivel, degrau);
+    let gratificao = this.calculadora.calcularGratificacao(classe, base);
     let gfe = this.gfe[gfeIndex];
     let gfc = this.gfc[gfcIndex];
     let decontoPlanoSaude = 0;
@@ -58,22 +59,22 @@ export class PGCS {
       decontoPlanoSaude = dadosPlano.desconto;
     }
 
-    //SERPROS
-    if (idadeSerpros) {
-      const salarioContribuicao = base + gfe + gfc;
-      const dadosSerpros = this.serpros.calculate({idade, percentualSerpros, salarioContribuicao});
-      descontoSerpros = dadosSerpros.desconto;
-    }
-
     //REAJUSTE
     if (reajuste) {
       base = this.calculadora.aplicarReajuste(base, reajuste);
       alimentacao = this.calculadora.aplicarReajuste(alimentacao, reajuste);
       gfe = this.calculadora.aplicarReajuste(gfe, reajuste);
       gfc = this.calculadora.aplicarReajuste(gfc, reajuste);
+      gratificao = this.calculadora.calcularGratificacao(classe, base);
     }
 
-    const gratificao = this.calculadora.calcularGratificacao(classe, base);
+    //SERPROS
+    if (idadeSerpros) {
+      const salarioContribuicao = base + gratificao + gfe + gfc;
+      const dadosSerpros = this.serpros.calculate({idadeSerpros, percentualSerpros, salarioContribuicao});
+      descontoSerpros = dadosSerpros.desconto;
+    }
+
     const gratificacaoPerc = this.calculadora.p_gratificacao[classe];
     const totalBruto = base + gratificao + gfe + gfc;
 

@@ -48,8 +48,8 @@ export class Serpros {
                    0.1189,
                    0.0660,
                    0.2158,
-                   0.2158 ] // ... 65
-        this.pg = [0.0526,  // 18...
+                   0.2158 ]; // ... 65
+        this.pg = [0.0526,   // 18...
                    0.0526,
                    0.0526,
                    0.0475,
@@ -96,14 +96,14 @@ export class Serpros {
                    0.0027,
                    0.0027,
                    0.0027,
-                   0.0027 ] // ... 65
+                   0.0027 ]; // ... 65
     }
 
-    calculate({idade, percentualVariavel, salarioContribuicao}) {
-        const index = this._parseIndex(idade);
+    calculate({idadeSerpros, percentualSerpros, salarioContribuicao}) {
+        const index = this._parseIndex(idadeSerpros);
         const contribuicaoBasica = salarioContribuicao * 0.01;
-        const contribuicaoVariavel = ((salarioContribuicao - (8 * this.vrs)) * (percentualVariavel / 100));
-        const contribuicaoRisco = (salarioContribuicao * this.pg[index]) + ((salarioContribuicao - (14 * this.vrs)) * this.pa[index]);
+        const contribuicaoVariavel = ((salarioContribuicao - (8 * this.vrs)) * (percentualSerpros / 100));
+        const contribuicaoRisco = (salarioContribuicao * (this.pg[index] / 100)) + ((salarioContribuicao - (14 * this.vrs)) * (this.pa[index] / 100));
 
         return {
             contribuicaoBasica: contribuicaoBasica,
