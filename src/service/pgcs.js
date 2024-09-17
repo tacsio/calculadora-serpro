@@ -1,5 +1,6 @@
 import { Calculadora } from "./calc";
 import { PlanoSaude } from "./plano-saude";
+import { Serpros } from "./serpros";
 
 export class PGCS {
   constructor() {
@@ -21,6 +22,7 @@ export class PGCS {
 
     this.calculadora = new Calculadora();
     this.planoSaude = new PlanoSaude();
+    this.serpros = new Serpros();
   }
 
   calculate({
@@ -31,10 +33,12 @@ export class PGCS {
     gfcIndex = 0,
     reajuste,
     idade,
-    contribuicaoSerpros,
+    percentualSerpros,
+    idadeSerpros,
     checkAlimentacao,
   }) {
     let base = this.calculadora.calcularBase(this.niveis[0], nivel, degrau);
+    let gratificao = this.calculadora.calcularGratificacao(classe, base);
     let gfe = this.gfe[gfeIndex];
     let gfc = this.gfc[gfcIndex];
     let decontoPlanoSaude = 0;
@@ -55,20 +59,22 @@ export class PGCS {
       decontoPlanoSaude = dadosPlano.desconto;
     }
 
-    //SERPROS
-    if (contribuicaoSerpros) {
-      descontoSerpros = contribuicaoSerpros;
-    }
-
     //REAJUSTE
     if (reajuste) {
       base = this.calculadora.aplicarReajuste(base, reajuste);
       alimentacao = this.calculadora.aplicarReajuste(alimentacao, reajuste);
       gfe = this.calculadora.aplicarReajuste(gfe, reajuste);
       gfc = this.calculadora.aplicarReajuste(gfc, reajuste);
+      gratificao = this.calculadora.calcularGratificacao(classe, base);
     }
 
-    const gratificao = this.calculadora.calcularGratificacao(classe, base);
+    //SERPROS
+    if (idadeSerpros) {
+      const salarioContribuicao = base + gratificao + gfe + gfc;
+      const dadosSerpros = this.serpros.calculate({idadeSerpros, percentualSerpros, salarioContribuicao});
+      descontoSerpros = dadosSerpros.desconto;
+    }
+
     const gratificacaoPerc = this.calculadora.p_gratificacao[classe];
     const totalBruto = base + gratificao + gfe + gfc;
 
