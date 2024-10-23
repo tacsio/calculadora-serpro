@@ -1,8 +1,8 @@
 export class Calculadora {
   constructor() {
     //BASE
-    this.base = 8230.68;
-    this.alimentacao = 1180.80;
+    this.base = 8578.84;
+    this.alimentacao = 1230.72;
 
     //PERCENTUAIS
     this.p_alimentacao = 0.08;
