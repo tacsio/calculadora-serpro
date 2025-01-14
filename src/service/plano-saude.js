@@ -19,7 +19,7 @@ export class PlanoSaude {
 
     //101-8A - 104-8B => [0]
     //105-8A - 122-8B => [1]
-    this.participacao = [355.51, 284.95];
+    this.participacao = [380.07, 304.64];
   }
 
   calculate({ nivel, idade }) {
