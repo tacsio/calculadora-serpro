@@ -103,13 +103,11 @@ export class Serpros {
         const index = this._parseIndex(idadeSerpros);
         const contribuicaoBasica = salarioContribuicao * 0.01;
         const contribuicaoVariavel = ((salarioContribuicao - (8 * this.vrs)) * (percentualSerpros / 100));
-        const contribuicaoRisco = (salarioContribuicao * (this.pg[index] / 100)) + ((salarioContribuicao - (14 * this.vrs)) * (this.pa[index] / 100));
 
         return {
             contribuicaoBasica: contribuicaoBasica,
             contribuicaoVariavel: contribuicaoVariavel,
-            contribuicaoRisco: contribuicaoRisco,
-            desconto: contribuicaoBasica + contribuicaoVariavel + contribuicaoRisco
+            desconto: contribuicaoBasica + contribuicaoVariavel
         }
     }
 
