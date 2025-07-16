@@ -63,6 +63,8 @@ export class PGCS {
     if (reajuste) {
       base = this.calculadora.aplicarReajuste(base, reajuste);
       alimentacao = this.calculadora.aplicarReajuste(alimentacao, reajuste);
+      deducaoAlimentacao =
+        this.calculadora.calcularDeducaoAlimentacao(alimentacao);
       gfe = this.calculadora.aplicarReajuste(gfe, reajuste);
       gfc = this.calculadora.aplicarReajuste(gfc, reajuste);
       gratificao = this.calculadora.calcularGratificacao(classe, base);
