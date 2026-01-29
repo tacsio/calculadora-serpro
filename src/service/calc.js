@@ -1,8 +1,8 @@
 export class Calculadora {
   constructor() {
     //BASE
-    this.base = 8578.84;
-    this.alimentacao = 1230.72;
+    this.base = 9121.02;
+    this.alimentacao = 1308.50;
 
     //PERCENTUAIS
     this.p_alimentacao = 0.08;
@@ -11,9 +11,9 @@ export class Calculadora {
     this.p_fgts = 0.08;
 
     //IRPF
-    this.inss = 951.62;
+    this.inss = 988.07;
     this.alicotaIR = 0.275;
-    this.baseDeducao = 896.00;
+    this.baseDeducao = 908.73;
 
     //GRATIFICACAO
     this.p_gratificacao = {

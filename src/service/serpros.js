@@ -1,6 +1,6 @@
 export class Serpros {
     constructor() {
-        this.vrs = 521.39;
+        this.vrs = 549.13;
         this.pa = [0,        // 18...
                    0,
                    0,

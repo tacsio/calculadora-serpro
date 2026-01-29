@@ -8,16 +8,16 @@ export class PGCS {
     this.degraus = ["A", "B"];
     this.gratificaoes = ["Classe I", "Classe II", "Classe III"];
     this.gfe = [
-      0, 464.46, 503.48, 545.77, 591.62, 641.30, 695.19, 753.56, 816.86, 885.50,
-      959.86, 1040.52, 1127.90, 1222.66, 1325.36, 1436.63, 1557.34, 1688.16,
-      1829.98, 1983.71, 2150.35, 2330.94, 2526.77, 2739.00, 2969.06, 3218.51,
-      3488.83, 3781.91, 4099.60, 4443.96, 4817.23, 5221.90, 5660.52, 6136.03,
-      6651.43, 7210.18, 7815.79, 8472.33, 9184.02, 9955.46, 10791.70,
+      0, 493.81, 535.3, 580.26, 629.01, 681.83, 739.13, 801.18, 868.49, 941.46,
+      1020.52, 1106.28, 1199.18, 1299.93, 1409.12, 1527.43, 1655.76, 1794.85,
+      1945.63, 2109.08, 2286.25, 2478.26, 2686.46, 2912.1, 3156.7, 3421.92,
+      3709.32, 4020.93, 4358.69, 4724.82, 5121.68, 5551.92, 6018.26, 6523.83,
+      7071.8, 7665.86, 8309.75, 9007.78, 9764.45, 10584.65, 11473.74,
     ];
 
     this.gfc = [
-      0, 3784.38, 4472.44, 5160.49, 6880.67, 7224.70, 7568.77, 7912.75, 9632.98,
-      10321.03, 11009.07, 13073.31, 13417.33, 13761.37, 16169.61, 18233.77,
+      0, 4023.55, 4755.1, 5486.63, 7315.53, 7681.3, 8047.12, 8412.84, 10241.78,
+      10973.32, 11704.84, 13899.54, 14265.31, 14631.09, 17191.53, 19386.14,
     ];
 
     this.calculadora = new Calculadora();
@@ -73,7 +73,11 @@ export class PGCS {
     //SERPROS
     if (idadeSerpros) {
       const salarioContribuicao = base + gratificao + gfe + gfc;
-      const dadosSerpros = this.serpros.calculate({idadeSerpros, percentualSerpros, salarioContribuicao});
+      const dadosSerpros = this.serpros.calculate({
+        idadeSerpros,
+        percentualSerpros,
+        salarioContribuicao,
+      });
       descontoSerpros = dadosSerpros.desconto;
     }
 
@@ -85,7 +89,8 @@ export class PGCS {
     //DEDUCOES
     const irpf = this.calculadora.calcularIRPF(totalBruto, descontoSerpros);
     const inss = this.calculadora.inss;
-    const totalDeducoes = irpf+deducaoAlimentacao+inss+decontoPlanoSaude+descontoSerpros;
+    const totalDeducoes =
+      irpf + deducaoAlimentacao + inss + decontoPlanoSaude + descontoSerpros;
 
     const liquido =
       totalBruto -
